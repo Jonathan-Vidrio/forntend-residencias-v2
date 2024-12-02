@@ -2,21 +2,20 @@
 
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
-import { User } from '@/types';
+import { User } from '@/interfaces';
 import { updateClient } from './clients';
 import { updateWorker } from './workers';
-
-// Users
+import { permission } from 'process';
 
 export async function getUsers(): Promise<{ users: User[] } | { error: string }> {
   try {
-    const { user, accessToken } = await getAccessSession();
+    const { user, accessToken, permissions } = await getAccessSession();
 
     let url: string = '/users';
-    if (user.userType?.description === 'superAdmin') url = '/users';
-    else if (user.userType?.description === 'admin') url = '/users?exclude=superAdmin';
-    else if (user.userType?.description === 'worker') url = '/users?exclude=superAdmin&exclude=admin';
-    else url = '/users?exclude=superAdmin&exclude=admin&exclude=worker';
+    if (permissions?.includes('superAdmin')) url = '/users';
+    if (permissions?.includes('admin')) url = '/users?exclude=superAdmin';
+    if (permissions?.includes('receptionist')) url = '/users?exclude=superAdmin&exclude=admin';
+    if (permissions?.includes('client')) url = '/users?exclude=superAdmin&exclude=admin&exclude=worker';
 
     const users = await httpRequest({
       url,

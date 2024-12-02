@@ -1,6 +1,6 @@
 'use server';
 
-import { ServiceType } from '@/types';
+import { ServiceType } from '@/interfaces';
 import { getAccessSession } from '../auth/auth';
 import { httpRequest } from '@/helpers';
 

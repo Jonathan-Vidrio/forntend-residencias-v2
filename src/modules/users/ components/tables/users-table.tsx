@@ -15,7 +15,7 @@ import { CustomButton, Filters, Search, Select, Table } from '@/core';
 export const UsersTable = () => {
   const { users, userTypes, workerTypes } = useUsersStore(state => state);
   const { statuses } = useStatusesStore(state => state);
-  const { showLoading, hideLoading } = useUiStore(state => state);
+  const { hideLoading } = useUiStore(state => state);
 
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [getDeleted, setGetDeleted] = useState<boolean>(false);
@@ -36,10 +36,10 @@ export const UsersTable = () => {
 
   const loadData = async () => {
     try {
-      if (!users) await fetchGetUsers();
+      if (!statuses) await fetchGetStatuses();
       if (!userTypes) await fetchGetUserTypes();
       if (!workerTypes) await fetchGetWorkerTypes();
-      if (!statuses) await fetchGetStatuses();
+      if (!users) await fetchGetUsers();
     } catch {}
   };
 
@@ -57,7 +57,7 @@ export const UsersTable = () => {
 
     if (selectedUserTypeOption && filtered) filtered = filtered.filter((user: User) => user.userType?.description === selectedUserTypeOption);
 
-    if (selectedWorkerTypeOption && filtered && selectedUserTypeOption === 'worker')
+    if (selectedWorkerTypeOption && filtered && selectedUserTypeOption === 'WORKER')
       filtered = filtered.filter((user: User) => user.worker?.workerType?.description === selectedWorkerTypeOption);
 
     if (selectedStatusOption && filtered) filtered = filtered.filter((user: User) => user.status?.description === selectedStatusOption);
@@ -163,21 +163,6 @@ export const UsersTable = () => {
             setSearchTerm('');
           }}
         />
-
-        {selectedUserTypeOption === 'worker' && (
-          <>
-            <div className='w-[3px] bg-gray-300' />
-
-            <Link
-              href='/users/worker-types'
-              className='flex flex-row gap-x-2 text-white bg-blue-500 hover:bg-gray-400 p-3 rounded-md'
-              onClick={showLoading}
-            >
-              Worker Types
-              <ChevronRight size={24} />
-            </Link>
-          </>
-        )}
       </div>
 
       <div className='flex flex-row justify-end gap-x-5 items-end'>
@@ -202,7 +187,7 @@ export const UsersTable = () => {
                   withSelectAnOption={false}
                 />
 
-                {selectedUserTypeOption === 'worker' && (
+                {selectedUserTypeOption === 'WORKER' && (
                   <Select
                     label='Worker Type'
                     value={selectedWorkerTypeOption}
@@ -233,13 +218,13 @@ export const UsersTable = () => {
       </div>
 
       <Table
-        columns={selectedUserTypeOption === 'worker' ? [...columns, { key: 'worker.workerType.description', value: 'Worker Type' }] : columns}
+        columns={selectedUserTypeOption === 'WORKER' ? [...columns, { key: 'worker.workerType.description', value: 'Worker Type' }] : columns}
         data={filteredUsers?.map(user => {
           const row: any = {};
           columns.forEach(column => {
             row[column.key] = getNestedValue(user, column.key);
           });
-          if (selectedUserTypeOption === 'worker') {
+          if (selectedUserTypeOption === 'WORKER') {
             row['worker.workerType.description'] = getNestedValue(user, 'worker.workerType.description');
           }
           return row;

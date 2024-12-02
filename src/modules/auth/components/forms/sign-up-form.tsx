@@ -26,6 +26,7 @@ export const SignUpForm = (): JSX.Element => {
       setIsSubmitting(true);
 
       await fetchSignUp({ ...data });
+
       router.push(`/verify?email=${data.email}`);
     } catch {
     } finally {

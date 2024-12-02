@@ -2,7 +2,7 @@
 
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
-import { VehicleBrand } from '@/types';
+import { VehicleBrand } from '@/interfaces';
 
 export async function getVehicleBrands(): Promise<{ vehicleBrands: VehicleBrand[] } | { error: string }> {
   try {

@@ -30,7 +30,7 @@ export const PasswordRecoveryForm = () => {
 
       await fetchPasswordRecovery(data);
 
-      router.push(`/password-recovery/password-reset/${data.email}`);
+      router.push(`/password-reset?${encodeURI(data.email)}`);
 
       showLoading();
     } catch {
@@ -49,7 +49,7 @@ export const PasswordRecoveryForm = () => {
         </div>
 
         <CustomButton type='submit' disabled={isSubmitting}>
-          {isSubmitting ? <Spinner size='sm' color='white' /> : 'Sign In'}
+          {isSubmitting ? <Spinner size='sm' color='white' /> : 'Send OTP'}
         </CustomButton>
       </form>
     </div>

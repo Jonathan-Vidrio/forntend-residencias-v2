@@ -114,10 +114,6 @@ export async function fetchSignOut(): Promise<void> {
   }
 }
 
-export async function fetchGetAccessSession(): Promise<void> {}
-
-export async function fetchGetUserSignedIn(): Promise<void> {}
-
 export async function fetchPasswordRecovery(data: PasswordRecoveryFormValues): Promise<void> {
   const { openModal, setIsSuccess: setIsSucces, setChildren } = useModalStore.getState();
 

@@ -9,6 +9,7 @@ export const useModalStore = create<ModalState>()((set, get) => ({
   title: '',
   children: '',
   functions: {
+    handleCancel: () => {},
     handleSubmit: () => {},
   },
 
@@ -33,8 +34,8 @@ export const useModalStore = create<ModalState>()((set, get) => ({
   setChildren: children => set({ children }),
   resetChildren: () => set({ children: '' }),
 
-  setHandleSubmit: action => set({ functions: { handleSubmit: action } }),
-  resetHandleSubmit: () => set({ functions: { handleSubmit: () => {} } }),
+  setHandleSubmit: action => set({ functions: { handleSubmit: action, handleCancel: () => get().closeModal() } }),
+  resetHandleSubmit: () => set({ functions: { handleSubmit: () => {}, handleCancel: () => get().closeModal() } }),
 
   reset: () => {
     set({
@@ -45,6 +46,7 @@ export const useModalStore = create<ModalState>()((set, get) => ({
       children: '',
       functions: {
         handleSubmit: () => {},
+        handleCancel: () => {},
       },
     });
   },

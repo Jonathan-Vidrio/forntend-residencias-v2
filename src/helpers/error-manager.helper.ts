@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpStatusType } from '@/types';
+import { HttpErrorResponse, HttpStatusType } from '@/interfaces';
 
 export class ErrorManager extends Error {
   public error: HttpStatusType;

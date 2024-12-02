@@ -2,7 +2,7 @@
 
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
-import { Product } from '@/types';
+import { Product } from '@/interfaces';
 
 export async function getProducts(): Promise<{ products: Product[] } | { error: string }> {
   try {

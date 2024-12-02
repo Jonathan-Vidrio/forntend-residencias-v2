@@ -1,6 +1,14 @@
 import { PageContent } from '@/core';
 import { CreateServiceTypeForm } from '@/modules/services/components/forms/create-service-type-form';
 
+/**
+ * Renders the Create Service Type page.
+ *
+ * This page includes a form for creating a new service type.
+ *
+ * @component
+ * @returns {JSX.Element} The create service type page component.
+ */
 export default function CreateServiceType() {
   return (
     <PageContent title='Create Service Type' className='flex justify-center'>

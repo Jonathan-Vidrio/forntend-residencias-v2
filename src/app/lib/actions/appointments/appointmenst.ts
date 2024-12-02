@@ -4,6 +4,13 @@ import { Appointment } from '@/interfaces';
 import { getAccessSession } from '../auth/auth';
 import { httpRequest } from '@/helpers';
 
+/**
+ * Fetches available appointment dates for a specified number of days.
+ *
+ * @async
+ * @param {number} days - The number of days to fetch available dates for.
+ * @returns {Promise<{ dates: Date[] | string[] } | { error: string }>} The available dates or an error message.
+ */
 export async function getAvailableDates(days: number): Promise<{ dates: Date[] | string[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -20,6 +27,12 @@ export async function getAvailableDates(days: number): Promise<{ dates: Date[] |
   }
 }
 
+/**
+ * Fetches all appointments.
+ *
+ * @async
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The list of appointments or an error message.
+ */
 export async function getAppointments(): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -36,6 +49,12 @@ export async function getAppointments(): Promise<{ appointments: Appointment[] }
   }
 }
 
+/**
+ * Fetches the appointment history.
+ *
+ * @async
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The appointment history or an error message.
+ */
 export async function getAppointmentsHistory(): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -52,6 +71,12 @@ export async function getAppointmentsHistory(): Promise<{ appointments: Appointm
   }
 }
 
+/**
+ * Fetches deleted appointments.
+ *
+ * @async
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The deleted appointments or an error message.
+ */
 export async function getDeletedAppointments(): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -68,6 +93,13 @@ export async function getDeletedAppointments(): Promise<{ appointments: Appointm
   }
 }
 
+/**
+ * Fetches appointments for a specific client.
+ *
+ * @async
+ * @param {string} clientId - The ID of the client.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The client's appointments or an error message.
+ */
 export async function getAppointmentsByClient(clientId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -84,6 +116,13 @@ export async function getAppointmentsByClient(clientId: string): Promise<{ appoi
   }
 }
 
+/**
+ * Fetches the appointment history for a specific client.
+ *
+ * @async
+ * @param {string} clientId - The ID of the client.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The client's appointment history or an error message.
+ */
 export async function getAppointmentsHistoryByClient(clientId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -100,6 +139,13 @@ export async function getAppointmentsHistoryByClient(clientId: string): Promise<
   }
 }
 
+/**
+ * Fetches deleted appointments for a specific client.
+ *
+ * @async
+ * @param {string} clientId - The ID of the client.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The client's deleted appointments or an error message.
+ */
 export async function getDeletedAppointmentsByClient(clientId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -116,6 +162,13 @@ export async function getDeletedAppointmentsByClient(clientId: string): Promise<
   }
 }
 
+/**
+ * Fetches appointments for a specific worker.
+ *
+ * @async
+ * @param {string} workerId - The ID of the worker.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The worker's appointments or an error message.
+ */
 export async function getAppointmentsByWorker(workerId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -132,6 +185,13 @@ export async function getAppointmentsByWorker(workerId: string): Promise<{ appoi
   }
 }
 
+/**
+ * Fetches the appointment history for a specific worker.
+ *
+ * @async
+ * @param {string} workerId - The ID of the worker.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The worker's appointment history or an error message.
+ */
 export async function getAppointmentsHistoryByWorker(workerId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -148,6 +208,13 @@ export async function getAppointmentsHistoryByWorker(workerId: string): Promise<
   }
 }
 
+/**
+ * Fetches deleted appointments for a specific worker.
+ *
+ * @async
+ * @param {string} workerId - The ID of the worker.
+ * @returns {Promise<{ appointments: Appointment[] } | { error: string }>} The worker's deleted appointments or an error message.
+ */
 export async function getDeletedAppointmentsByWorker(workerId: string): Promise<{ appointments: Appointment[] } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -164,6 +231,13 @@ export async function getDeletedAppointmentsByWorker(workerId: string): Promise<
   }
 }
 
+/**
+ * Fetches a specific appointment by its ID.
+ *
+ * @async
+ * @param {string} id - The ID of the appointment.
+ * @returns {Promise<{ appointment: Appointment } | { error: string }>} The appointment details or an error message.
+ */
 export async function getAppointmentById(id: string): Promise<{ appointment: Appointment } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -180,6 +254,13 @@ export async function getAppointmentById(id: string): Promise<{ appointment: App
   }
 }
 
+/**
+ * Creates a new appointment.
+ *
+ * @async
+ * @param {Appointment} data - The data for the new appointment.
+ * @returns {Promise<{ appointment: Appointment } | { error: string }>} The created appointment or an error message.
+ */
 export async function createAppointment(data: Appointment): Promise<{ appointment: Appointment } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -197,6 +278,14 @@ export async function createAppointment(data: Appointment): Promise<{ appointmen
   }
 }
 
+/**
+ * Updates an existing appointment.
+ *
+ * @async
+ * @param {string} id - The ID of the appointment.
+ * @param {Appointment} data - The updated data for the appointment.
+ * @returns {Promise<{ appointment: Appointment } | { error: string }>} The updated appointment or an error message.
+ */
 export async function updateAppointment(id: string, data: Appointment): Promise<{ appointment: Appointment } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -214,6 +303,13 @@ export async function updateAppointment(id: string, data: Appointment): Promise<
   }
 }
 
+/**
+ * Deletes an appointment.
+ *
+ * @async
+ * @param {string} id - The ID of the appointment to delete.
+ * @returns {Promise<{ message: string } | { error: string }>} A success message or an error message.
+ */
 export async function deleteAppointment(id: string): Promise<{ message: string } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();
@@ -230,6 +326,13 @@ export async function deleteAppointment(id: string): Promise<{ message: string }
   }
 }
 
+/**
+ * Restores a deleted appointment.
+ *
+ * @async
+ * @param {string} id - The ID of the appointment to restore.
+ * @returns {Promise<{ appointment: Appointment } | { error: string }>} The restored appointment or an error message.
+ */
 export async function restoreAppointment(id: string): Promise<{ appointment: Appointment } | { error: string }> {
   try {
     const { user, accessToken } = await getAccessSession();

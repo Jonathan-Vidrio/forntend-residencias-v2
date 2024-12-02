@@ -1,6 +1,6 @@
 'use server';
 
-import { Client } from '@/types';
+import { Client } from '@/interfaces';
 import { getAccessSession } from '../auth/auth';
 import { httpRequest } from '@/helpers';
 import { getUserByEmail } from './users';

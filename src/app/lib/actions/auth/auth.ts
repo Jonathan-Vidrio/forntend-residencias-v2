@@ -19,11 +19,13 @@ export async function signIn(credentials: SignInFormValues): Promise<{ user: Use
     });
 
     const permissions = [];
-    if (user.userType?.description === 'superAdmin') permissions.push('superAdmin');
-    if (user.userType?.description === 'admin') permissions.push('admin');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description === 'receptionist') permissions.push('receptionist');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description !== 'receptionist') permissions.push('worker');
-    if (user.userType?.description === 'client') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'SUPERADMIN') permissions.push('superAdmin');
+    if (user.userType?.description?.toUpperCase() === 'ADMIN') permissions.push('admin');
+    if (user.userType?.description?.toUpperCase() === 'CLIENT') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'WORKER') {
+      if (user.worker?.workerType?.description?.toUpperCase() === 'RECEPTIONIST') permissions.push('receptionist');
+      if (user.worker?.workerType?.description?.toUpperCase() !== 'RECEPTIONIST') permissions.push('worker');
+    }
 
     const { created } = await createSession({ user, permissions, accessToken });
     if (!created) throw ErrorManager.handleError({ error: 'BAD_REQUEST', message: 'Session could not be created.', statusCode: 400 });
@@ -67,11 +69,13 @@ export async function verify(credentials: VerifyFormValues): Promise<{ user: Use
     });
 
     const permissions = [];
-    if (user.userType?.description === 'superAdmin') permissions.push('superAdmin');
-    if (user.userType?.description === 'admin') permissions.push('admin');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description === 'receptionist') permissions.push('receptionist');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description !== 'receptionist') permissions.push('worker');
-    if (user.userType?.description === 'client') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'SUPERADMIN') permissions.push('superAdmin');
+    if (user.userType?.description?.toUpperCase() === 'ADMIN') permissions.push('admin');
+    if (user.userType?.description?.toUpperCase() === 'CLIENT') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'WORKER') {
+      if (user.worker?.workerType?.description?.toUpperCase() === 'RECEPTIONIST') permissions.push('receptionist');
+      if (user.worker?.workerType?.description?.toUpperCase() !== 'RECEPTIONIST') permissions.push('worker');
+    }
 
     const { created } = await createSession({ user, permissions, accessToken });
     if (!created) throw ErrorManager.handleError({ error: 'BAD_REQUEST', message: 'Session could not be created.', statusCode: 400 });
@@ -108,7 +112,7 @@ export async function signOut(): Promise<any | { error: string }> {
   }
 }
 
-export const getAccessSession = async (): Promise<{ user: User; accessToken: string }> => {
+export const getAccessSession = async (): Promise<{ user: User; accessToken: string; permissions?: string[] }> => {
   try {
     const session = (await cookies()).get('session')?.value;
     if (!session) throw ErrorManager.handleError({ error: 'UNAUTHORIZED', message: 'No session found.', statusCode: 401 });
@@ -117,7 +121,7 @@ export const getAccessSession = async (): Promise<{ user: User; accessToken: str
     const payload = await decrypt(session);
     if (!payload || !payload.accessToken) throw ErrorManager.handleError({ error: 'UNAUTHORIZED', message: 'Invalid session.', statusCode: 401 });
 
-    return { user: payload.user as User, accessToken: payload.accessToken.toString() };
+    return { user: payload.user as User, accessToken: payload.accessToken.toString(), permissions: payload.permissions as string[] };
   } catch (error) {
     return Promise.reject(error);
   }
@@ -146,11 +150,13 @@ export async function passwordReset(data: PasswordResetFormValues): Promise<{ us
     });
 
     const permissions = [];
-    if (user.userType?.description === 'superAdmin') permissions.push('superAdmin');
-    if (user.userType?.description === 'admin') permissions.push('admin');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description === 'receptionist') permissions.push('receptionist');
-    if (user.userType?.description === 'worker' && user.worker?.workerType?.description !== 'receptionist') permissions.push('worker');
-    if (user.userType?.description === 'client') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'SUPERADMIN') permissions.push('superAdmin');
+    if (user.userType?.description?.toUpperCase() === 'ADMIN') permissions.push('admin');
+    if (user.userType?.description?.toUpperCase() === 'CLIENT') permissions.push('client');
+    if (user.userType?.description?.toUpperCase() === 'WORKER') {
+      if (user.worker?.workerType?.description?.toUpperCase() === 'RECEPTIONIST') permissions.push('receptionist');
+      if (user.worker?.workerType?.description?.toUpperCase() !== 'RECEPTIONIST') permissions.push('worker');
+    }
 
     const { created } = await createSession({ user, permissions, accessToken });
     if (!created) throw ErrorManager.handleError({ error: 'BAD_REQUEST', message: 'Session could not be created.', statusCode: 400 });

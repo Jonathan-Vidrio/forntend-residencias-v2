@@ -1,6 +1,6 @@
 'use server';
 
-import { WorkerType } from '@/types';
+import { WorkerType } from '@/interfaces';
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
 

@@ -2,7 +2,7 @@
 
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
-import { Resource } from '@/types';
+import { Resource } from '@/interfaces';
 
 export async function getResourcesByService(serviceId: string): Promise<{ resources: Resource[] } | { error: string }> {
   try {

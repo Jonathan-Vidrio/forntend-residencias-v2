@@ -2,7 +2,7 @@
 
 import { httpRequest } from '@/helpers';
 import { getAccessSession } from '../auth/auth';
-import { ServiceDetail } from '@/types';
+import { ServiceDetail } from '@/interfaces';
 
 export async function getServicesDetailsByService(serviceId: string): Promise<{ serviceDetails: ServiceDetail[] } | { error: string }> {
   try {

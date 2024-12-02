@@ -21,6 +21,9 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
   const [userTypesOptions, setUserTypesOptions] = useState<{ key: string; value: string }[]>([]);
   const [workerTypesOptions, setWorkerTypesOptions] = useState<{ key: string; value: string }[]>([]);
 
+  const [selectedUserType, setSelectedUserType] = useState<any | null>(null);
+  const [selectedWorkerType, setSelectedWorkerType] = useState<any | null>(null);
+
   const router = useRouter();
 
   const {
@@ -32,7 +35,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
   } = useForm<UserFormValues>({
     resolver: zodResolver(userSchema),
     defaultValues: {
-      phoneNumber: '52',
+      phoneNumber: '+52',
     },
   });
 
@@ -59,7 +62,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
       },
     };
 
-    if (data.userTypeDescription === 'client') {
+    if (data.userTypeDescription === 'CLIENT') {
       userData.client = {
         street: data.street || undefined,
         number: Number(data.number) || undefined,
@@ -67,7 +70,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
       };
     }
 
-    if (data.userTypeDescription === 'worker') {
+    if (data.userTypeDescription === 'WORKER') {
       userData.worker = {
         workerType: {
           description: data.workerTypeDescription,
@@ -132,7 +135,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
         </div>
       )}
 
-      {userTypeDescription === 'worker' && workerTypesOptions.length > 0 && (
+      {userTypeDescription === 'WORKER' && workerTypesOptions.length > 0 && (
         <div>
           <Controller
             control={control}
@@ -143,7 +146,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
         </div>
       )}
 
-      {userTypeDescription === 'client' && (
+      {userTypeDescription === 'CLIENT' && (
         <>
           <div>
             <CustomInput label='Street' {...register('street')} />
@@ -156,7 +159,7 @@ export const CreateUserForm = ({ className }: { className?: string }) => {
           </div>
 
           <div>
-            <CustomInput label='Phone Number' type='number' {...register('phoneNumber')} />
+            <CustomInput label='Phone Number' {...register('phoneNumber')} />
             {errors.phoneNumber && <small className='text-red-500'>{errors.phoneNumber.message}</small>}
           </div>
         </>

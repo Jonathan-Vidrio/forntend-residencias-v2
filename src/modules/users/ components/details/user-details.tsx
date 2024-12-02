@@ -142,26 +142,12 @@ export const UserDetails = ({ id }: { id: string }) => {
 
           {userDetails?.userType?.description && <RowDetail title='User Type' value={userDetails?.userType?.description} />}
 
-          {userDetails?.userType?.description === 'client' && (
-            <>
-              {userDetails?.client?.phoneNumber && <RowDetail title='Phone Number' value={userDetails?.client?.phoneNumber} />}
+          {userDetails?.worker?.workerType?.description && <RowDetail title='Worker Type' value={userDetails?.worker?.workerType?.description} />}
 
-              {userDetails?.client?.street && <RowDetail title='Street' value={userDetails?.client?.street} />}
+          {userDetails.client?.phoneNumber && <RowDetail title='Phone Number' value={userDetails.client.phoneNumber} />}
 
-              {userDetails.client?.number && <RowDetail title='Number' value={userDetails.client?.number.toString()} />}
-            </>
-          )}
-
-          {userDetails?.userType?.description === 'worker' && userDetails?.worker?.workerType?.description && (
-            <RowDetail
-              title='Worker Type'
-              value={userDetails?.worker?.workerType?.description}
-              href={`/users/worker-types/details/${userDetails?.worker?.workerType?.id}`}
-              message={
-                !userDetails?.worker?.workerType?.description ? 'This worker type is deleted. Please, select another one or restore this one.' : ''
-              }
-              canAccess={['superAdmin', 'admin', 'receptionist'].some(role => permissions?.includes(role))}
-            />
+          {userDetails.client?.street && userDetails.client?.number && (
+            <RowDetail title='Address' value={`${userDetails.client.street} #${userDetails.client.number}`} />
           )}
 
           {userDetails?.status?.description && <RowDetail title='Status' value={userDetails?.status?.description} />}
@@ -180,34 +166,33 @@ export const UserDetails = ({ id }: { id: string }) => {
         </div>
       </div>
 
-      {services && services?.length > 0 && (userDetails.userType?.description === 'client' || userDetails.userType?.description === 'worker') && (
-        <div className='mt-20'>
-          <h1 className='text-xl font-bold'>Services</h1>
-          <div className='border-b border-gray-200 mt-2'></div>
+      <div className='flex flex-col gap-y-5 mt-10'>
+        {services && services?.length > 0 && (
+          <div>
+            <h1 className='text-xl font-bold'>Services</h1>
+            <div className='border-b border-gray-200 mt-2'></div>
 
-          <Table
-            columns={servicesColumns}
-            data={(services || [])?.map(item => {
-              const row: any = {};
-              servicesColumns.forEach(column => {
-                if (column.key === 'createdAt' || column.key === 'updatedAt' || column.key === 'deletedAt') {
-                  row[column.key] = item[column.key] ? convertUTCToLocal(item[column.key] as Date) : '-';
-                } else {
-                  row[column.key] = getNestedValue(item, column.key);
-                }
-              });
-              return row;
-            })}
-            details
-            href='/services/details/'
-          />
-        </div>
-      )}
+            <Table
+              columns={servicesColumns}
+              data={(services || [])?.map(item => {
+                const row: any = {};
+                servicesColumns.forEach(column => {
+                  if (column.key === 'createdAt' || column.key === 'updatedAt' || column.key === 'deletedAt') {
+                    row[column.key] = item[column.key] ? convertUTCToLocal(item[column.key] as Date) : '-';
+                  } else {
+                    row[column.key] = getNestedValue(item, column.key);
+                  }
+                });
+                return row;
+              })}
+              details
+              href='/services/details/'
+            />
+          </div>
+        )}
 
-      {servicesHistory &&
-        servicesHistory?.length > 0 &&
-        (userDetails.userType?.description === 'client' || userDetails.userType?.description === 'worker') && (
-          <div className='mt-20'>
+        {servicesHistory && servicesHistory?.length > 0 && (
+          <div>
             <h1 className='text-xl font-bold'>Services History</h1>
             <div className='border-b border-gray-200 mt-2'></div>
 
@@ -230,10 +215,8 @@ export const UserDetails = ({ id }: { id: string }) => {
           </div>
         )}
 
-      {appointments &&
-        appointments?.length > 0 &&
-        (userDetails.userType?.description === 'client' || userDetails.userType?.description === 'worker') && (
-          <div className='mt-20'>
+        {appointments && appointments?.length > 0 && (
+          <div>
             <h1 className='text-xl font-bold'>Appointments</h1>
             <div className='border-b border-gray-200 mt-2'></div>
 
@@ -256,10 +239,8 @@ export const UserDetails = ({ id }: { id: string }) => {
           </div>
         )}
 
-      {appointmentsHistory &&
-        appointmentsHistory?.length > 0 &&
-        (userDetails.userType?.description === 'client' || userDetails.userType?.description === 'worker') && (
-          <div className='mt-20'>
+        {appointmentsHistory && appointmentsHistory?.length > 0 && (
+          <div>
             <h1 className='text-xl font-bold'>Appointments History</h1>
             <div className='border-b border-gray-200 mt-2'></div>
 
@@ -281,6 +262,7 @@ export const UserDetails = ({ id }: { id: string }) => {
             />
           </div>
         )}
+      </div>
     </>
   );
 };

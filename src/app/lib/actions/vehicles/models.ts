@@ -1,6 +1,6 @@
 'use server';
 
-import { VehicleModel } from '@/types';
+import { VehicleModel } from '@/interfaces';
 import { getAccessSession } from '../auth/auth';
 import { httpRequest } from '@/helpers';
 

@@ -3,7 +3,7 @@
 import { createError } from '@/helpers';
 import { useModalStore } from '@/store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { VerifyFormValues } from '../../types/verify-form-values';
@@ -11,10 +11,12 @@ import { verifySchema } from '../../schemas/verify.schema';
 import { fetchVerify } from '../../fetching/auth';
 import { CustomButton, CustomInput, Spinner } from '@/core';
 
-export const VerifyForm = ({ email }: { email: string }) => {
+export const VerifyForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
 
   const {
     register,
@@ -26,7 +28,7 @@ export const VerifyForm = ({ email }: { email: string }) => {
     try {
       setIsSubmitting(true);
 
-      await fetchVerify({ ...data, email });
+      await fetchVerify({ ...data, email: email || '' });
     } catch {
     } finally {
       setIsSubmitting(false);

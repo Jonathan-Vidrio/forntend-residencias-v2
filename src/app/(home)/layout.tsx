@@ -5,6 +5,17 @@ import { User } from '@/interfaces';
 import { VerticalNavbar } from '@/core';
 import { Suspense } from 'react';
 
+/**
+ * Renders the Home Layout.
+ *
+ * This layout includes a vertical navigation bar and wraps child components in a scrollable content area.
+ *
+ * @async
+ * @component
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to be rendered inside the layout.
+ * @returns {Promise<JSX.Element>} The home layout component.
+ */
 export default async function HomeLayout({ children }: { children: React.ReactNode }) {
   const session = (await cookies()).get('session')?.value as string;
   const payload = await decrypt(session);

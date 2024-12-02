@@ -1,6 +1,6 @@
 'use server';
 
-import { Status } from '@/types';
+import { Status } from '@/interfaces';
 import { getAccessSession } from '../auth/auth';
 import { httpRequest } from '@/helpers';
 
