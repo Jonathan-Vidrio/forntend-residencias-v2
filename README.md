@@ -77,7 +77,7 @@ This project is a web application built with Next.js, leveraging Firebase for st
 - **Framework**: [Next.js](https://nextjs.org/) (v15.0.3)
 - **React Libraries**: React (v19.0.0) and React DOM (v19.0.0)
 - **Form Management**: [React Hook Form](https://react-hook-form.com/) and [Zod](https://zod.dev/)
-- **Firebase**: For authentication and storage.
+- **Firebase**: For storage.
 - **UUID**: For generating unique identifiers.
 - **State Management**: [Zustand](https://zustand-demo.pmnd.rs/).
 - **Encryption**: [Jose](https://github.com/panva/jose).
