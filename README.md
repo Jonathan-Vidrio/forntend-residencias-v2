@@ -1,64 +1,90 @@
 
-# Nombre del Proyecto
+# Project Name
 
-Breve descripción del proyecto. Por ejemplo:  
-"Una aplicación web creada con Next.js que permite [describir la funcionalidad principal]."
+This project is a web application built with Next.js, leveraging Firebase for authentication and storage, and consuming an API hosted on Render. It is designed to provide a fast and interactive user experience.
 
 ---
 
-## Instalación
+## Installation
 
-1. Clona este repositorio:
+1. Clone this repository:
    ```bash
-   git clone https://github.com/usuario/proyecto-nextjs.git
+   git clone https://github.com/user/nextjs-project.git
    ```
 
-2. Navega al directorio del proyecto:
+2. Navigate to the project directory:
    ```bash
-   cd proyecto-nextjs
+   cd nextjs-project
    ```
 
-3. Instala las dependencias:
+3. Install the dependencies:
    ```bash
    npm install
    ```
 
-4. Configura las variables de entorno:  
-   Crea un archivo `.env.local` y agrega las claves necesarias, como:
+4. Configure environment variables:  
+   Create a `.env.local` file and add the following keys:
    ```
-   NEXT_PUBLIC_API_URL=http://example.com/api
+   # API
+   HOST_URL=http://localhost:4000/api/v1
+   # PRIVATE_KEY used for encryption operations
+   PRIVATE_KEY=kW2+nVBB8zVEJnoPRFWNSN3u4Di29PmCxL1JXnx//mA
+
+   # Firebase
+   API_KEY=AIzaSyCUaZXaWkouEpGaQ3vJ_LM7qgE9RqE74kM
+   AUTH_DOMAIN=sisgosa-b8515.firebaseapp.com
+   PROJECT_ID=sisgosa-b8515
+   STORAGE_BUCKET=sisgosa-b8515.appspot.com
+   MESSAGING_SENDER_ID=130788298995
+   APP_ID=1:130788298995:web:753e19b6e779ab6e74a786
    ```
 
 ---
 
-## Uso
+## Usage
 
-- **Modo de desarrollo**:
+- **Development mode**:
   ```bash
   npm run dev
   ```
-  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+  Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-- **Construir para producción**:
+- **Build for production**:
   ```bash
   npm run build
   ```
 
-- **Ejecutar la aplicación en producción**:
+- **Run the application in production**:
   ```bash
   npm start
   ```
 
 ---
 
-## Tecnologías Utilizadas
+## Available Scripts
 
-- [Next.js](https://nextjs.org/) - Framework principal.
-- [React](https://reactjs.org/) - Biblioteca de UI.
-- [CSS Modules](https://nextjs.org/docs/basic-features/built-in-css-support) o [Tailwind CSS](https://tailwindcss.com/) - Estilos.
+- `dev`: Runs the server in development mode.
+- `build`: Builds the application for production.
+- `start`: Runs the compiled application in production mode.
+- `lint`: Lints the code using ESLint.
+- `format`: Formats the code using Prettier.
+- `docs`: Generates documentation using Typedoc.
 
 ---
 
-## Licencia
+## Main Dependencies
 
-Este proyecto está bajo la Licencia [MIT](LICENSE).
+- **Framework**: [Next.js](https://nextjs.org/) (v15.0.3)
+- **React Libraries**: React (v19.0.0) and React DOM (v19.0.0)
+- **Form Management**: [React Hook Form](https://react-hook-form.com/) and [Zod](https://zod.dev/)
+- **Firebase**: For authentication and storage.
+- **UUID**: For generating unique identifiers.
+- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/).
+- **Encryption**: [Jose](https://github.com/panva/jose).
+
+---
+
+## Styles
+
+This project uses [Tailwind CSS](https://tailwindcss.com/) for rapid and flexible styling configuration.
+
