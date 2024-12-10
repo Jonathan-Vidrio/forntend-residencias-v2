@@ -1,7 +1,7 @@
 
 # Project Name
 
-This project is a web application built with Next.js, leveraging Firebase for authentication and storage, and consuming an API hosted on Render. It is designed to provide a fast and interactive user experience.
+This project is a web application built with Next.js, leveraging Firebase for storage, and consuming an API. It is designed to provide a fast and interactive user experience.
 
 ---
 
